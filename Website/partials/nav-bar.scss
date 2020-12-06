@@ -1,0 +1,108 @@
+@import './tables.scss';
+
+.nav-bar{
+    grid-area: nav;
+    z-index: 100;
+    padding: 10px 0;
+	display: flex;
+    position: fixed;
+	width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    direction: rtl;
+    background: white;
+    box-shadow: 2px 2px 5px #dee3e9;
+    border-top: 2px solid;
+    border-image-slice: 1;
+    border-width: 100%;
+    border-image-source: linear-gradient(to right,#4bb887,#16b6d0,#d6e58a);
+    @include media-min-width(980px, 0){
+        height: 132px;
+        padding: 0;
+        flex-wrap: wrap;
+        align-content: space-between;
+    }  
+    .logos__container{
+        display: flex;
+        margin: 7px 20px 7px 0;
+        align-items: center;
+        justify-content: space-evenly;
+        .menu{
+            height: 18px;
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            span{
+                width: 18px;
+                height: 2px;
+                background: #374f60;
+            }
+        }
+        img{
+            margin-right: -7px;
+            height: 48px;
+            width: 252px;
+        }
+    }
+    .title__container{
+        position: relative;
+        top: -5px;
+        right: -40px;
+        text-align: center;
+        line-height: 1.1;
+        font-size: 0.9rem;
+        @include media-min-width(980px, 0){
+            text-align: right;
+            bottom: 16px;
+            right: 11px;
+            line-height: 1; 
+            font-size: 10px;
+        }  
+        @include media-min-width(980px, 800px){
+            width: 85%;
+        }    
+        @include media-min-width(800px, 0){
+            width: 65%;
+        }    
+        a{
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #24343f;
+            @include media-min-width(980px, 0){
+                font-size: 13px;
+            }  
+        }         
+    }
+    .btn__container{
+        width: 15%;
+        @include media-min-width(980px, 0){
+            width: auto;
+            margin-left: 5px;
+            margin-bottom: 15px;
+        }
+    }
+    button{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border-color: #39475d;
+        box-shadow: none;
+        background: #39475d;
+        border-radius: 50px;
+        color: white;
+        padding: 4px 16px;
+        @include media-min-width(385px, 0){
+            font-size: 11px;
+            padding: 4px 8px;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+.button-dark-theme{
+    border-color: #d8d8d8 !important;
+    background: #d8d8d8 !important;
+    color: black !important;
+}

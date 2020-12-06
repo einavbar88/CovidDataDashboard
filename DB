@@ -1,0 +1,50 @@
+1.total cases **so far + 2.since midnight + yesterday + 4.critical + medium
+
+active + since midnight + home/community + hotel + hospital
+
+ventilated + 5.since midnight + daily change
+
+dead **so far + 6.since midnight 
+
+healed **so far + 3.since midnight + daily change
+
+tests yesterday + 7.since midnight + daily change
+
+doubling rate 
+
+critical graph: 4.critical
+
+new outside red zones
+
+epidemic curve: 2.new cases + 3.new healed + 1.total cases
+
+critical graph: 4. critical, 5. ventilated, 6. dead
+
+by age and gender **so far: cases, dead, ventilated, critical
+
+spread zones: cases, active, new cases last week, tests last week, active per capita
+
+crew curfew: nurses, doctors, others
+
+hospitals status: hospital name, %general, %covid, staff curfew
+
+tests: 7.number of tests, positive percentage = cases/tests
+
+
+people:
+date
+random name
+ID
+age
+city
+deceased? 
+if no - current state[normal, medium, critical]
+if critical - ventilated?
+if medium/critical - in hospital? which one?
+
+
+
+hospitals:
+name
+max capacity
+quarantined staff - nurses, doctors, others

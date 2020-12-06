@@ -1,0 +1,56 @@
+@import url(//fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+@import './colors';
+
+@mixin media-min-width($max, $min) {
+    @media (max-width: $max) and (min-width: $min){
+        @content;
+    }
+}
+table{
+    width: 100%;
+    tr{
+        display: grid;
+        grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
+        th{
+            font-weight: 400;
+            font-size: 13px;
+            padding: 2px;
+        }
+    }
+}
+#hospital-headers{
+    tr{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+.header-row{
+    background: $tablesHeaders;
+    padding: 3px 0;
+    th{
+        font-weight: 400;
+        font-size: 13px;
+        outline: 0 1px solid $tablesHeaders;
+    }
+    #city-header,  #hospital-header{
+        width: 150px;
+        text-align: right;
+    }
+   
+}
+.height283{
+    overflow: auto;
+}
+#spread-areas__table, #hospitals-status__table{
+    
+    overflow: auto;
+    position: relative;
+    tr{
+        border-bottom: 1px solid $tablesHeaders;
+    }
+}
+#hospitals-status__table{
+    tr{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}

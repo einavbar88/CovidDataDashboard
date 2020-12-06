@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קורונה - לוח בקרה</title>
+    <link rel="icon" href="https://datadashboard.health.gov.il/COVID-19/favicon.ico">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script type="text/javascript" src="https://www.highcharts.com/samples/data/usdeur.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://rawgit.com/highcharts/rounded-corners/master/rounded-corners.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logos__container">
+            <div class="menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <img src="https://datadashboard.health.gov.il/COVID-19/assets/images/logo_DAshboard-01.png">
+        </div>
+        <div class="title__container"><a class="title" href="#">נגיף הקורונה בישראל - תמונת מצב כללית</a>
+            <div class="sub-title">עדכון אחרון: <span>17 בנובמבר 2020
+                    |
+                    20:09</span></div>
+        </div>
+        <div class="btn__container">
+            <button id="accessibility-btn">לתצוגה נגישה</button>
+        </div>
+    </nav>
+    <div class="main__container">
+        <div class="statistics__container">
+            <div class="statistics__item">
+                <div id="infected" class="statistics">
+                    <div class="stats">
+                        <div class="data">
+                            <h6>סה"כ מאומתים (נדבקים)</h6>
+                            <h5 id="total-cases"></h5>
+                            <p> <span id="new-cases-today"></span> מחצות | <span id="new-cases-yesterday"></span> אתמול
+                            </p>
+                        </div>
+                        <div class="breakdown">
+                            <div id="medium" class="breakdown__item">
+                                <div class="breakdown__circle yellow"></div>
+                                <div class="breakdown__text">
+                                    <span>בינוני</span>
+                                    <h6 id="fair-cases-active"></h6>
+                                </div>
+                            </div>
+                            <div id="critical" class="breakdown__item">
+                                <div class="breakdown__circle red"></div>
+                                <div class="breakdown__text">
+                                    <span>קשה</span>
+                                    <h6 id="serious-cases-active"></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics__item">
+                <div id="active" class="statistics">
+                    <div class="stats">
+                        <div class="data">
+                            <h6>חולים פעילים</h6>
+                            <h5 id="active-cases"></h5>
+                            <p> <span id="active-cases-today"></span> מחצות</p>
+                        </div>
+                        <div class="breakdown">
+                            <div id="community" class="breakdown__item">
+                                <div class="breakdown__text">
+                                    <span>בית/קהילה </span>
+                                    <h6 id="home-quarantined"></h6>
+                                </div>
+                            </div>
+                            <div id="hotel" class="breakdown__item">
+                                <div class="breakdown__text">
+                                    <span>מלון</span>
+                                    <h6 id="hotel-quarantined"></h6>
+                                </div>
+                            </div>
+                            <div id="hospital" class="breakdown__item">
+                                <div class="breakdown__text">
+                                    <span>בי"ח</span>
+                                    <h6 id="hospital-quarantined"></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics__item">
+                <div id="ventilated" class="statistics">
+                    <div class="stats">
+                        <div class="data">
+                            <h6>מונשמים</h6>
+                            <h5 id="ventilated-total"></h5>
+                            <p> <span id="ventilated-today"></span> מחצות</p>
+                        </div>
+                        <div  id="ventilated-so-far__btn" class="daily-change">
+                            <div class="daily-change__icon">
+                                <nb-icon><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                        viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor">
+                                        <g data-name="Layer 2">
+                                            <g data-name="bar-chart-2">
+                                                <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0">
+                                                </rect>
+                                                <path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path>
+                                                <path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path>
+                                                <path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path>
+                                            </g>
+                                        </g>
+                                    </svg></nb-icon>
+                            </div>
+                            <div class="daily-change__text">
+                                <span>מגמת שינוי יומית</span>
+                                <div class="daily-changes" id="ventilated-so-far__container">
+                                    <h3>מונשמים - שינוי יומי</h3>
+                                    <div class="chart" id="ventilated-so-far-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics__item">
+                <div id="dead" class="statistics">
+                    <div class="stats">
+                        <div class="data">
+                            <h6>נפטרים מצטבר</h6>
+                            <h5 id="deceased-total"></h5>
+                            <p> <span id="deceased-today"></span> מחצות</p>
+                        </div>
+                        <div id="deceased-so-far__btn" class="daily-change">
+                            <div class="daily-change__icon">
+                                <nb-icon><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                        viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor">
+                                        <g data-name="Layer 2">
+                                            <g data-name="bar-chart-2">
+                                                <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0">
+                                                </rect>
+                                                <path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path>
+                                                <path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path>
+                                                <path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path>
+                                            </g>
+                                        </g>
+                                    </svg></nb-icon>
+                            </div>
+                            <div class="daily-change__text">
+                                <span>מגמת שינוי יומית</span>
+                                <div class="daily-changes" id="deceased-so-far__container">
+                                    <h3>נפטרים - שינוי יומי</h3>
+                                    <div id="deceased-so-far-chart" class="chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics__item">
+                <div id="recovered" class="statistics">
+                    <div class="stats">
+                        <div class="data">
+                            <h6>החלימו עד כה</h6>
+                            <h5 id="healed-total"></h5>
+                            <p> <span id="healed-today"></span> מחצות</p>
+                        </div>
+                        <div id="healed-so-far__btn" class="daily-change">
+                            <div class="daily-change__icon">
+                                <nb-icon><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                        viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor">
+                                        <g data-name="Layer 2">
+                                            <g data-name="bar-chart-2">
+                                                <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0">
+                                                </rect>
+                                                <path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path>
+                                                <path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path>
+                                                <path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path>
+                                            </g>
+                                        </g>
+                                    </svg></nb-icon>
+                            </div>
+                            <div class="daily-change__text">
+                                <span>מגמת שינוי יומית</span>
+                                <div class="daily-changes" id="healed-so-far__container">
+                                    <h3>מחלימים - שינוי יומי</h3>
+                                    <div id="healed-so-far-chart" class="chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics__item">
+                <div id="tests-made" class="statistics">
+                    <div class="stats">
+                        <div class="data">
+                            <h6>כלל הבדיקות שהתבצעו אתמול</h6>
+                            <h5 id="tests-yesterday"></h5>
+                            <p><span id="tests-today"></span> היום מחצות</p>
+                        </div>
+                        <div id="tests-so-far__btn" class="daily-change">
+                            <div class="daily-change__icon">
+                                <nb-icon><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                        viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor">
+                                        <g data-name="Layer 2">
+                                            <g data-name="bar-chart-2">
+                                                <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0">
+                                                </rect>
+                                                <path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path>
+                                                <path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path>
+                                                <path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path>
+                                            </g>
+                                        </g>
+                                    </svg></nb-icon>
+                            </div>
+                            <div class="daily-change__text">
+                                <span>בדיקות יומית</span>
+                                <div class="daily-changes" id="tests-so-far__container">
+                                    <h3>בדיקות - מגמת שינוי יומית</h3>
+                                    <div id="tests-so-far-chart" class="chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wc__container">
+            <div class="graphs box">
+                <div class="graphs__headline">
+                    <span></span>
+                    <h3>מדדי התפשטות בהסתכלות שבועית</h3>
+                    <p><img src="./img/destination.png" alt=""> יעדי ממשלה</p>
+                </div>
+                <div class="graphs__container">
+                    <div class="container">
+                        <h6>מגמת שינוי במאומתים חדשים וקצב הכפלה</h6>
+                        <div class="graph-note__container">
+                            <div class="graph__note">
+                                <span class="i__icon">i</span>
+                                % שינוי בממוצע מאומתים חדשים שבועי, ומספר הימים להכפלת הנדבקים (בסוגריים)
+                            </div>
+                        </div>
+                        <canvas id="doubling-rate__chart"></canvas>
+                    </div>
+                    <div id="critical-number__container" class="container">
+                        <h6>מספר החולים קשה</h6>
+                        <canvas id="critical-number__chart"></canvas>
+                    </div>
+                    <div class="container">
+                        <h6>מספר המאומתים החדשים מחוץ לאזורי ההתפשטות</h6>
+                        <div class="graph-note__container">
+                            <div class="graph__note">
+                                <span class="i__icon">i</span>
+                                הנתונים אינם כוללים מאומתים מישובים אדומים, מוסדות גריאטריים וחוזרים מחו"ל</div>
+                        </div>
+                        <canvas id="new-infected-outside-red-zones__chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="more-graphs__container">
+            <div class="wc__container full-size-responsive epidemic-curve__container">
+                <div class="box">
+                    <div class="box-headline__div">
+                        <h6 class="box-headline__title">עקומה אפידמית<div class="dropdown custom-select">
+                                <select id="epidemic-curve__btn">
+                                    <option value="so-far">עד עכשיו</option>
+                                    <option value="week">שבוע אחרון</option>
+                                    <option value="two-weeks" selected="select">שבועיים אחרונים</option>
+                                    <option value="month">חודש אחרון</option>
+                                </select>
+                            </div>
+
+                        </h6>
+                        <div class="box-headline__details">
+                            <div><span class="darkgreen"></span>מאומתים חדשים</div>
+                            <div><span class="grey"></span>מחלימים חדשים</div>
+                            <div><span class="torquize"></span>מאומתים מצטבר</div>
+                        </div>
+                        <div class="box-headline__more-details graph__note">
+                            <img src="https://datadashboard.health.gov.il/COVID-19/assets/images/increment.svg">
+                            מספר הנדבקים היום הינו כפול מהמספר לפני 38 ימים
+                        </div>
+                        <div id="epidemic-curve__graph" class="height247"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="wc__container critical-ventilated__container full-size-responsive">
+                <div class="box">
+                    <div class="box-headline__div">
+                        <h6 class="box-headline__title">חולים קשה ומונשמים
+                            <select id="critical-ventilated__btn">
+                                <option value="so-far">עד עכשיו</option>
+                                <option value="week">שבוע אחרון</option>
+                                <option value="two-weeks">שבועיים אחרונים</option>
+                                <option value="month" selected="select">חודש אחרון</option>
+                            </select>
+                        </h6>
+                        <div class="box-headline__details">
+                            <div><span class="olive"></span>חולים קשה</div>
+                            <div><span class="torquize"></span>מונשמים</div>
+                            <div><span class="green"></span>נפטרים</div>
+                        </div>
+                        <div id="critical-ventilated__graph" class="height247"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="more-graphs__container">
+            <div class="wc__container positive-by-age__container full-size-responsive">
+                <div class="box">
+                    <div class="box-headline__div">
+                        <h6 class="box-headline__title">פיזור מאומתים לפי גיל ומגדר
+                            <select id="by-age__btn">
+                                <option value="cases" selected="select">מאומתים</option>
+                                <option value="deceased">נפטרים</option>
+                                <option value="ventilated">מונשמים</option>
+                                <option value="serious">מצב קשה</option>
+                            </select>
+                        </h6>
+                        <div class="box-headline__details">
+                            <div><span class="torquize"></span>גברים</div>
+                            <div><span class="olive"></span>נשים</div>
+                        </div>
+                        <div id="positive-by-age__graph" class="height263"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="wc__container spread-areas__container full-size-responsive">
+                <div class="box">
+                    <div class="box-headline__div">
+                        <h6 class="box-headline__title">אזורי התפשטות</h6>
+                        <table class="sortable">
+                            <tr class="header-row">
+                                <th id="city-header">יישוב</th>
+                                <th id="cases-header">מאומתים</th>
+                                <th id="active-header">חולים פעילים</th>
+                                <th id="new-cases-header">חולים חדשים ב7 ימים האחרונים</th>
+                                <th id="tests-header">בדיקות ב-7 ימים האחרונים</th>
+                                <th id="per-capita-header">חולים פעילים ל10,000 נפש</th>
+                            </tr>
+                        </table>
+                        <div class="height283">
+                            <table id="spread-areas__table">
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="more-graphs__container">
+            <div class="wc__container staff-curfew__container full-size-responsive">
+                <div class="box">
+                    <div class="box-headline__div">
+                        <h6 class="box-headline__title">אנשי צוות בריאות בבידוד</h6>
+                        <div id="staff-curfew__graph" class="height247"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="wc__container hospitals-status__container full-size-responsive">
+                <div class="box">
+                    <div class="box-headline__div">
+                        <h6 class="box-headline__title">סטטוס בתי חולים</h6>
+                        <table id="hospital-headers" class="sortable">
+                            <tr class="header-row">
+                                <th id="hospital-header">בית חולים</th>
+                                <th id="capacity-header">% תפוסה כללי</th>
+                                <th id="corona-capacity-header">% תפוסת קורונה</th>
+                                <th id="staff-curfew-header">צוות בבידוד</th>
+                            </tr>
+                        </table>
+                        <div class="height283">
+                            <table id="hospitals-status__table">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wc__container infected-locating__container full-size-responsive">
+                <div class="box">
+                    <div class="box-headline__div">
+                        <h6 class="box-headline__title">בדיקות לאיתור נדבקים</h6>
+                        <div class="graph__note">
+                            <span class="i__icon">i</span>
+                            הנתונים אינם כוללים מידע על בדיקות לאבחון החלמה
+                        </div>
+                        <div class="box-headline__details">
+                            <div><span class="torquize"></span>בדיקות</div>
+                            <div><span class="darkgreen"></span>מאומתים</div>
+                        </div>
+                        <div id="infected-locating__graph" class="height247"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    <script src="sorttable.js"></script>
+</body>
+
+</html>

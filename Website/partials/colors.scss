@@ -1,0 +1,36 @@
+$backgroundColor: #edf1f7;
+$backgroundColorAccessibility:#49667a;
+$blocksBackgroundColor: #ffffff;
+$blocksBackgroundColorAccessibility: #384f5f;
+$doublingRateChartGardientColor: #63d0fd;
+$doublingRateChartGardientColorAccessibility: #2eaab5;
+$criticalVentilatedChartGardientColor: #61a4a5;
+$criticalVentilatedChartGardientColorAccessibility: #95ea7e;
+$grey: #898989;
+$greyAccessibility: #9ffa82; 
+$olive: #b6ca51; 
+$oliveAccessibility: #fd8264;
+$lightBlue: #50cbfd;
+$lightBlueAccessibility: #2cd2db;
+$darkGreen: #237d7d;
+$darkGreenAccessibility:#9be985;
+$otherDarkGreen: #1c7d7e;
+$otherDarkGreenAccessibility:#fd8264;
+$tablesHeaders: #e6f1f3;
+$tablesHeadersAccessibility: #2a3b47;
+$tablesBarBackground: #eff5f9;
+$tablesBarBackgroundAccessibility: #293b48;
+$tablesBarColor: #50cbfd;
+$tablesBarColorAccessibility: #2cd2db;
+
+.hospitals-chart-bar__bg{
+    width: 50px;
+    height: 11px;
+    background: $tablesBarBackground;
+    border-radius: 20px;
+    margin: 0 15px;
+}
+.hospitals-chart-bar__color{
+    height: 11px;
+    background: $tablesBarColor;
+}
