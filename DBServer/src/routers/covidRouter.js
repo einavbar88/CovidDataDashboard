@@ -4,7 +4,7 @@ const DailyStats = require('../models/dailyUpdateModel')
 const HospitalStats = require('../models/hospitalsModel')
 
 const router = new express.Router()
-
+//add edit for daily after entering/changing a case/person
 router.post('/new/person', async (req, res) => {
     const person = new Stats(req.body)
     try {
